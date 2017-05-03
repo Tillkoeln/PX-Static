@@ -1,13 +1,16 @@
 TEMPLATE = app
-TARGET = Project-X-0.1.0-Static-Client
-VERSION = 0.1.0
+TARGET = Project-X-1.5.0-Static-Client-webkit-tab
+VERSION = 1.1.0
 INCLUDEPATH += src src/json src/qt
-QT += core gui network
+QT += core gui network webkit
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 DEFINES += QT_STATIC
 CONFIG += no_include_pwd
 CONFIG += thread
 CONFIG += static
+CONFIG += openssl
+# CONFIG += openssl-linked
+# and 
 
 QMAKE_CXXFLAGS = -fpermissive
 
