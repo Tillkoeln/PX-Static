@@ -1,8 +1,8 @@
 TEMPLATE = app
-TARGET = Project-X-1.5.0-Static-Client-webkit-tab
+TARGET = Project-X-1.6.0-Static-Client-webkit-tab
 VERSION = 1.1.0
 INCLUDEPATH += src src/json src/qt
-QT += core gui network webkit
+QT += core gui network 
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 DEFINES += QT_STATIC
 CONFIG += no_include_pwd
@@ -491,3 +491,10 @@ contains(RELEASE, 1) {
 }
 
 system($$QMAKE_LRELEASE -silent $$_PRO_FILE_)
+
+unix:!macx: LIBS += -L$$PWD/../../../../../Downloads/qt-everywhere-opensource-src-4.8.7/lib/ -lQtWebKit
+
+INCLUDEPATH += $$PWD/../../../../../Downloads/qt-everywhere-opensource-src-4.8.7/include/QtWebKit
+DEPENDPATH += $$PWD/../../../../../Downloads/qt-everywhere-opensource-src-4.8.7/include/QtWebKit
+
+unix:!macx: PRE_TARGETDEPS += $$PWD/../../../../../Downloads/qt-everywhere-opensource-src-4.8.7/lib/libQtWebKit.a
