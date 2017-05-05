@@ -8,6 +8,7 @@
 #include "transactiontablemodel.h"
 #include "addressbookpage.h"
 #include "sendcoinsdialog.h"
+#include "merchantpage.h"
 #include "signverifymessagedialog.h"
 #include "optionsdialog.h"
 #include "aboutdialog.h"
@@ -118,6 +119,8 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
 
     sendCoinsPage = new SendCoinsDialog(this);
 
+    merchantPage = new MerchantPage(this);	
+	
     multiSendDialog = new MultiSendDialog(this);	
 	
     signVerifyMessageDialog = new SignVerifyMessageDialog(this);
@@ -129,6 +132,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     centralWidget->addWidget(receiveCoinsPage);
     centralWidget->addWidget(sendCoinsPage);
     centralWidget->addWidget(multiSendDialog);	
+	centralWidget->addWidget(merchantPage);	
     setCentralWidget(centralWidget);
 
     // Create status bar
@@ -253,6 +257,12 @@ void BitcoinGUI::createActions()
     multiSendAction->setCheckable(true);
     multiSendAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_7));
     tabGroup->addAction(multiSendAction);
+
+    merchantAction = new QAction(QIcon(":/icons/address-book"), tr("&Shop/Donate"), this);
+    merchantAction->setToolTip(tr("Merchants"));
+    merchantAction->setCheckable(true);
+    merchantAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_6));
+    tabGroup->addAction(merchantAction);
 	
     connect(overviewAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(overviewAction, SIGNAL(triggered()), this, SLOT(gotoOverviewPage()));
@@ -266,7 +276,11 @@ void BitcoinGUI::createActions()
     connect(addressBookAction, SIGNAL(triggered()), this, SLOT(gotoAddressBookPage()));
     connect(multiSendAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(multiSendAction, SIGNAL(triggered()), this, SLOT(multiSendClicked()));
-
+    connect(merchantAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
+    connect(merchantAction, SIGNAL(triggered()), this, SLOT(gotoMerchantPage()));
+  	
+	
+	
     quitAction = new QAction(QIcon(":/icons/quit"), tr("E&xit"), this);
     quitAction->setToolTip(tr("Quit application"));
     quitAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
@@ -358,7 +372,8 @@ void BitcoinGUI::createToolBars()
     toolbar->addAction(receiveCoinsAction);
     toolbar->addAction(historyAction);
     toolbar->addAction(addressBookAction);
-
+    toolbar->addAction(merchantAction);
+	
     QToolBar *toolbar2 = addToolBar(tr("Actions toolbar"));
     toolbar2->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
     toolbar2->addAction(exportAction);
@@ -736,7 +751,14 @@ void BitcoinGUI::gotoOverviewPage()
     exportAction->setEnabled(false);
     disconnect(exportAction, SIGNAL(triggered()), 0, 0);
 }
+void BitcoinGUI::gotoMerchantPage()
+{
+    merchantAction->setChecked(true);
+    centralWidget->setCurrentWidget(merchantPage);
 
+    exportAction->setEnabled(false);
+    disconnect(exportAction, SIGNAL(triggered()), 0, 0);
+}
 void BitcoinGUI::gotoHistoryPage()
 {
     historyAction->setChecked(true);
