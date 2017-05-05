@@ -367,12 +367,13 @@ void BitcoinGUI::createToolBars()
 {
     QToolBar *toolbar = addToolBar(tr("Tabs toolbar"));
     toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    toolbar->addAction(overviewAction);
+    toolbar->addAction(merchantAction);
+	toolbar->addAction(overviewAction);
     toolbar->addAction(sendCoinsAction);
     toolbar->addAction(receiveCoinsAction);
     toolbar->addAction(historyAction);
     toolbar->addAction(addressBookAction);
-    toolbar->addAction(merchantAction);
+
 	
     QToolBar *toolbar2 = addToolBar(tr("Actions toolbar"));
     toolbar2->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
@@ -1014,7 +1015,7 @@ void BitcoinGUI::updateStakingIcon()
         else if (IsInitialBlockDownload())
             labelStakingIcon->setToolTip(tr("Not staking because wallet is syncing"));
         else if (!nWeight)
-            labelStakingIcon->setToolTip(tr("Not staking because you don't have mature coins"));
+            labelStakingIcon->setToolTip(tr("STAKING IS NOT ENABLED ON YOUR CURRENT CUSTOMER/USER LEVEL"));
         else
             labelStakingIcon->setToolTip(tr("Not staking"));
     }
