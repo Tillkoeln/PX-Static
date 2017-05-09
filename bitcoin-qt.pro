@@ -2,6 +2,7 @@ TEMPLATE = app
 TARGET = Project-X-2.0.0-Static-Client-WebviewClient
 VERSION = 1.1.0
 INCLUDEPATH += src src/json src/qt
+QT += texttospeech
 QT += core gui network 
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 DEFINES += QT_STATIC

@@ -81,7 +81,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     rpcConsole(0)
 {
     resize(850, 550);
-    setWindowTitle(tr("Project-X") + " - " + tr("Wallet"));
+    setWindowTitle(tr("NanoX") + " - " + tr("whoop whoop, this is the Title Bar, but i see no beer"));
 #ifndef Q_OS_MAC
     qApp->setWindowIcon(QIcon(":icons/bitcoin"));
     setWindowIcon(QIcon(":icons/bitcoin"));
